@@ -1,0 +1,241 @@
+/* google font */
+/* ドット文字 */
+/* .dotgothic16-regular {
+    font-family: "DotGothic16", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+/* 角丸ゴシック */
+/* .zen-maru-gothic-regular {
+    font-family: "Zen Maru Gothic", serif;
+    font-weight: 400;
+    font-style: normal;
+} */
+
+/* 手書き */
+/* .zen-kurenaido-regular {
+    font-family: "Zen Kurenaido", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+} */
+
+/* かっちりめゴシック
+.zen-kaku-gothic-new-regular {
+    font-family: "Zen Kaku Gothic New", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+} */
+
+/* 角優しめゴシック */
+/* .ibm-plex-sans-jp-regular {
+    font-family: "IBM Plex Sans JP", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+ここまで5種類 */ 
+
+/* ここから中身の設定 */
+/* ページの中心のほうに表示、上下間隔あける */
+* {
+  margin: 5px;
+  padding: 5px;
+  box-sizing: border-box; 
+}
+
+body {
+  background: rgb(253, 252, 198);
+  font-family:"Zen Maru Gothic", serif;
+  font-weight: 500;
+  color:#333
+}
+
+/* 送信ボタン */
+button{
+  background: rgb(248, 151, 23);
+  font-family:"Zen Maru Gothic", serif;
+  font-weight: 500;
+  color:#ffffff
+}
+
+/*  名前の入力*/
+input {
+  border: 0.5px solid rgb(248, 151, 23);
+  outline: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-family:"Zen Maru Gothic", serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+
+
+
+
+h1 {
+  color: rgb(248, 151, 23);
+  margin-bottom: 40px;
+  font-size: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+.homework-section {
+  width: 90%;
+  text-align: center;
+  margin: 0 auto;
+  padding: 50px 20px;
+  max-width: 1200px; 
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* .input-area {
+  text-align: left;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+} */
+
+
+
+
+
+
+.homework-area,
+.date-area {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+label {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: blue;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.homework-input,
+.date {
+  width: 150px;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.btn-add-btn {
+  background: rgb(19, 19, 252);
+  color: #fff;
+  /* font-weight: bold; */
+  border: none;
+  border-radius: 10px; /* 丸みを維持 */
+  width: 100%; /* フル幅に設定 */
+  max-width: 200px; /* 横長にするため広く設定 */
+  padding: 15px 50px; /* パディングを広く設定して文字が収まるように */
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1.2em; 
+  text-align: center; 
+}
+.btn-del-btn {
+    background: rgb(19, 19, 252);
+    color: #fff;
+    /* font-weight: bold; */
+    border: none;
+    border-radius: 10px; /* 丸みを維持 */
+    width: 100%; /* フル幅に設定 */
+    max-width: 200px; /* 横長にするため広く設定 */
+    padding: 15px 50px; /* パディングを広く設定して文字が収まるように */
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 1.2em;
+    text-align: center; 
+  }
+
+.add-btn:hover {
+  background: #81abfa;
+}
+.add-del:hover {
+  background: #81abfa;
+}
+
+.display-homework {
+  text-align: left;
+  width: 100%;
+  margin: 60px auto 0 auto; 
+  padding: 20px; 
+  background: #fff;
+  border-radius: 20px;
+  border:5px solid blue;
+  /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+}
+
+
+.homewrok-item {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 2px solid blue;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffeefc;
+  padding: 15px;
+  transition: 0.3s linear;
+}
+
+.item-wrapper {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.item-date {
+  background:blue;
+  color: #FFF;
+  padding: 7px 15px;
+  border-radius: 10px;
+  font-size: 0.7em;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
+
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .todo-section {
+    padding: 30px 10px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .homework-item {
+    font-size: 1em;
+    padding: 10px;
+  }
+
+  .item-date {
+    font-size: 0.7em;
+  }
+
+  .btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .display-homework {
+    margin: 40px auto 0 auto;
+    padding: 15px;
+  }
+}
+
