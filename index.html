@@ -21,9 +21,24 @@
 
 <div>
     <div id="clock"></div>
-    <div> なまえ：<input type="text" id="uname"> </div>
-    <div>
-        <textarea id="text" cols="30" rows="10"></textarea>
+    <div> なまえ<br/> 
+        <select id="uname">
+            <option value="">選択してください</option>
+            <option value="パパ">パパ</option>
+            <option value="ママ">ママ</option>
+            <option value="なっちゃん">なっちゃん</option>
+        </select>
+    <div>今いる場所<br/> 
+        <select id="place">
+            <option value="">選択してください</option>
+            <option value="職場">職場</option>
+            <option value="学校">学校</option>
+            <option value="塾">塾</option>
+            <option value="移動中">移動中</option>
+        </select>
+</div>
+    <div>メッセージ</br>
+        <textarea id="text" cols="30" rows="10"></textarea><br/>
         <button id="send">おくる</button>
     </div>
     <div id="output" style="overflow: auto; height: 300px;"></div>
@@ -81,78 +96,64 @@
 
     // 送信
     $("#send").on("click", function(){
+        const uname = $("#uname").val();
+        const place = $("#place").val();
+        const text = $("#text").val();
+
+        if (uname === "" || text === "") {
+            alert("名前とメッセージを入力してください。");
+            return;
+        }
+
         const msg = {
-            uname : $("#uname").val(),
-            text : $("#text").val()
-            // timestamp: new Date().toLocaleString() // 現在の日時を追加   
-
+            uname: uname,
+            text: text,
+            place: place,
+            timestamp: new Date().toLocaleString()  // 現在の日時を追加
         };
-        // console.log(msg);
-        const newPostRef = push(dbRef);//ユニークキーを与える
-        // console.log(newPostRef);
-        set(newPostRef,msg);
-        // set(dbRef,msg);
 
-
-        // const uname = $("#uname").val();
-        // const text = $("#text").val();
-        // alert(uname + text);//取得確認
+        const newPostRef = push(dbRef);
+        set(newPostRef, msg);
     });
-  
-// 最初にデータ取得＆onSnapshotでリアルタイムにデータを取得
-onChildAdded(dbRef, function(data){
-    const msg = data.val();
-    // const key = data.val();
-    const key = data.key; //削除・更新に必須
-    let h =  '<p id="'+key+'">'
-        h += msg.uname;
-        h += '<br>'
-        h += '<span contentEditable="true" id="'+key+'_update">'+msg.text+'</span>'
-        h += '<img class="remove" data-key="'+key+'" src="img/delete.png" style="cursor:pointer; width:30px; height:30px;"/>';
-        h += '<img class="update" data-key="'+key+'" src="img/update.png" style="cursor:pointer; width:30px; height:30px;"/>';
-        h += '</p>'
-        $("#output").prepend(h); 
-        // $("#output").append(h); //outputの最後に追加
-})
 
-// 削除イベント
-$("#output").on("click",".remove", function(){
-    const key = $(this).attr("data-key");
-    const remove_item = ref(db,"chat/"+key);
-    remove(remove_item); //Firebaseデータ削除関数
-})
-
-// 更新イベント
-$("#output").on("click",".update", function(){
-    const key = $(this).attr("data-key");
-    update(ref(db,"chat/"+key),{
-        text: $("#"+key+'_update').html()
+    onChildAdded(dbRef, function(data){
+        const msg = data.val();
+        const key = data.key;
+        let h = `<p id="${key}">`;
+            h += `<strong>${msg.uname}</strong> (${msg.timestamp})<br>`;
+            h += `<strong>場所:</strong> ${msg.place}<br>`; // 場所を表示            
+            h += `<span contentEditable="true" id="${key}_update">${msg.text}</span>`;
+            h += `<img class="remove" data-key="${key}" src="img/delete.png" style="cursor:pointer; width:30px; height:30px;"/>`;
+            h += `<img class="update" data-key="${key}" src="img/update.png" style="cursor:pointer; width:30px; height:30px;"/>`;
+            h += `</p>`;
+        $("#output").prepend(h);
     });
-})
 
+    $("#output").on("click", ".remove", function(){
+        const key = $(this).attr("data-key");
+        const remove_item = ref(db, "chat/" + key);
+        remove(remove_item);
+    });
 
-// 削除処理がFirebase側で実行されたらイベント発生！
-onChildRemoved(dbRef,(data) => {
-    $('#'+data.key).remove(); //DOM操作関数（対象を削除）
-})
+    $("#output").on("click", ".update", function(){
+        const key = $(this).attr("data-key");
+        update(ref(db, "chat/" + key), {
+            text: $("#" + key + "_update").html()
+        });
+    });
 
-// 更新処理がFirebase側で実行されたらイベント発生！
-onChildChanged(dbRef, (data) => {
-     $('#'+data.key+'_update').html(data.val().text); 
-     $('#'+data.key+'_update').fadeOut(800).fadeIn(800); 
-});
+    onChildRemoved(dbRef, (data) => {
+        $('#' + data.key).remove();
+    });
 
-  </script>
+    onChildChanged(dbRef, (data) => {
+        $('#' + data.key + '_update').html(data.val().text);
+        $('#' + data.key + '_update').fadeOut(800).fadeIn(800);
+    });
 
-
-
-
-
+</script>
 </body>
 </html>
-
-
-
 
 
 

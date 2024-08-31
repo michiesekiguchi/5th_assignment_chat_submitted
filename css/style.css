@@ -50,16 +50,29 @@ body {
   color:#333
 }
 
+#clock {
+  font-size: 1.5em;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
 /* 送信ボタン */
 button{
   background: rgb(248, 151, 23);
+  border: none;
+  border-radius: 10px; /* 丸みを維持 */
   font-family:"Zen Maru Gothic", serif;
-  font-weight: 500;
-  color:#ffffff
+  color:
+  max-width: 100px; /* 横長にするため広く設定 */
+  padding: 15px 50px; /* パディングを広く設定して文字が収まるように */
+  cursor: pointer;
+  margin-top: 20px;
+  font-size: 1em; 
+  text-align: center; 
 }
 
 /*  名前の入力*/
-input {
+select {
   border: 0.5px solid rgb(248, 151, 23);
   outline: none;
   border-radius: 10px;
@@ -70,7 +83,17 @@ input {
   width: 200px;
 }
 
-
+textarea {
+  border: 0.5px solid rgb(248, 151, 23);
+  outline: none;
+  border-radius: 10px;
+  padding: 12px;
+  font-family:"Zen Maru Gothic", serif;
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  width: 500px;
+  height: 150px;
+}
 
 
 
